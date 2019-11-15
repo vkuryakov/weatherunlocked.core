@@ -1,5 +1,4 @@
 # Weather Unlocked Client
-[![Build status](https://ci.appveyor.com/api/projects/status/fv8g176hscmt0b1o?svg=true)](https://ci.appveyor.com/project/drakar4ik/readmetest)
 
 An asynchronous .NET Core client for Local Weather API of Weather Unlocked service.
 
