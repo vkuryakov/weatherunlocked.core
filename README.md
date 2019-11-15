@@ -27,24 +27,24 @@ Example:
 
 Add Weather Unlocked service in startup.cs:
 
-        public void ConfigureServices(IServiceCollection services)
-        {
-        	...
-            services.AddWeatherUnlockedService();
-            ...
-        }
+		public void ConfigureServices(IServiceCollection services)
+		{
+			...
+		    services.AddWeatherUnlockedService();
+		    ...
+		}
 
 Now you can pass Weather Unlocked client via DI:
-    public class MyController : ControllerBase
-    {
-        private readonly IWeatherUnlockedService _client;
-        public MyController(IWeatherUnlockedService client)
-        {
-            _client = client;
-        }
 
-        ...
-    }
+		public class MyController : ControllerBase
+		{
+		    private readonly IWeatherUnlockedService _client;
+		    public MyController(IWeatherUnlockedService client)
+		    {
+		        _client = client;
+		    }
+		    ...
+		}
 
 and use it in your code:
 
