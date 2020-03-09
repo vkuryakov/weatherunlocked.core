@@ -33,49 +33,49 @@ namespace WeatherUnlocked.Core.Client
 
         public async Task<CurrentWeatherResponse> GetCurrentAsync(float latitude, float longitude)
         {
-            return await GetCurrentAsync(latitude, longitude, _options.Localization);
+            return await GetCurrentAsync(latitude, longitude, _options.Localization).ConfigureAwait(false);
         }
 
         public async Task<CurrentWeatherResponse> GetCurrentAsync(float latitude, float longitude, Localization localization)
         {
             string url = string.Format("{0}api/current/{1},{2}?{3}", BaseURL, latitude.ToString(), longitude.ToString(), BuildQueryString(localization));
-            string result = await SendRequestAsync(url);
+            string result = await SendRequestAsync(url).ConfigureAwait(false);
             return DeserializeJson<CurrentWeatherResponse>(result);
         }
 
         public async Task<CurrentWeatherResponse> GetCurrentAsync(string code)
         {
-            return await GetCurrentAsync(code, _options.Localization);
+            return await GetCurrentAsync(code, _options.Localization).ConfigureAwait(false);
         }
 
         public async Task<CurrentWeatherResponse> GetCurrentAsync(string code, Localization localization)
         {
             string url = string.Format("{0}api/current/{1}?{2}", BaseURL, code, BuildQueryString(localization));
-            string result = await SendRequestAsync(url);
+            string result = await SendRequestAsync(url).ConfigureAwait(false);
             return DeserializeJson<CurrentWeatherResponse>(result);
         }
 
         public async Task<ForecastWeatherReponse> GetForecastAsync(float latitude, float longitude)
         {
-            return await GetForecastAsync(latitude, longitude, _options.Localization);
+            return await GetForecastAsync(latitude, longitude, _options.Localization).ConfigureAwait(false);
         }
 
         public async Task<ForecastWeatherReponse> GetForecastAsync(float latitude, float longitude, Localization localization)
         {
             string url = string.Format("{0}api/forecast/{1},{2}?{3}", BaseURL, latitude.ToString(), longitude.ToString(), BuildQueryString(localization));
-            string result = await SendRequestAsync(url);
+            string result = await SendRequestAsync(url).ConfigureAwait(false);
             return DeserializeJson<ForecastWeatherReponse>(result);
         }
 
         public async Task<ForecastWeatherReponse> GetForecastAsync(string code)
         {
-            return await GetForecastAsync(code, _options.Localization);
+            return await GetForecastAsync(code, _options.Localization).ConfigureAwait(false);
         }
 
         public async Task<ForecastWeatherReponse> GetForecastAsync(string code, Localization localization)
         {
             string url = string.Format("{0}api/forecast/{1}?{2}", BaseURL, code, BuildQueryString(localization));
-            string result = await SendRequestAsync(url);
+            string result = await SendRequestAsync(url).ConfigureAwait(false);
             return DeserializeJson<ForecastWeatherReponse>(result);
         }
 
@@ -97,12 +97,13 @@ namespace WeatherUnlocked.Core.Client
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
             request.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             var client = _clientFactory.CreateClient();
-            var clientResponse = await client.SendAsync(request);
+            var clientResponse = await client.SendAsync(request).ConfigureAwait(false);
+            var result = await clientResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (clientResponse.StatusCode == HttpStatusCode.Forbidden)
             {
-                throw new ForbiddenException(await clientResponse.Content.ReadAsStringAsync());
+                throw new ForbiddenException(result);
             }
-            var result = await clientResponse.Content.ReadAsStringAsync();
+            
             if (clientResponse.StatusCode != HttpStatusCode.OK)
             {
                 throw new HttpException(clientResponse);

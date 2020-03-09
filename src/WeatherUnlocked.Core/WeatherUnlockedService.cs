@@ -42,49 +42,49 @@ namespace WeatherUnlocked.Core
 
         public async Task<CurrentWeatherData> CurrentAsync(float latitude, float longitude)
         {
-            var resp = await _client.GetCurrentAsync(latitude, longitude);
+            var resp = await _client.GetCurrentAsync(latitude, longitude).ConfigureAwait(false);
             return _mapper.Map<CurrentWeatherResponse, CurrentWeatherData>(resp);
         }
 
         public async Task<CurrentWeatherData> CurrentAsync(float latitude, float longitude, Localization localization)
         {
-            var resp = await _client.GetCurrentAsync(latitude, longitude, localization);
+            var resp = await _client.GetCurrentAsync(latitude, longitude, localization).ConfigureAwait(false);
             return _mapper.Map<CurrentWeatherResponse, CurrentWeatherData>(resp);
         }
 
         public async Task<CurrentWeatherData> CurrentAsync(string code)
         {
-            var resp = await _client.GetCurrentAsync(code);
+            var resp = await _client.GetCurrentAsync(code).ConfigureAwait(false);
             return _mapper.Map<CurrentWeatherResponse, CurrentWeatherData>(resp);
         }
 
         public async Task<CurrentWeatherData> CurrentAsync(string code, Localization localization)
         {
-            var resp = await _client.GetCurrentAsync(code, localization);
+            var resp = await _client.GetCurrentAsync(code, localization).ConfigureAwait(false);
             return _mapper.Map<CurrentWeatherResponse, CurrentWeatherData>(resp);
         }
 
         public async Task<ForecastWeatherData> ForecastAsync(float latitude, float longitude)
         {
-            var resp = await _client.GetForecastAsync(latitude, longitude);
+            var resp = await _client.GetForecastAsync(latitude, longitude).ConfigureAwait(false);
             return _mapper.Map<ForecastWeatherReponse, ForecastWeatherData>(resp);
         }
 
         public async Task<ForecastWeatherData> ForecastAsync(float latitude, float longitude, Localization localization)
         {
-            var resp = await _client.GetForecastAsync(latitude, longitude, localization);
+            var resp = await _client.GetForecastAsync(latitude, longitude, localization).ConfigureAwait(false);
             return _mapper.Map<ForecastWeatherReponse, ForecastWeatherData>(resp);
         }
 
         public async Task<ForecastWeatherData> ForecastAsync(string code)
         {
-            var resp = await _client.GetForecastAsync(code);
+            var resp = await _client.GetForecastAsync(code).ConfigureAwait(false);
             return _mapper.Map<ForecastWeatherReponse, ForecastWeatherData>(resp);
         }
 
         public async Task<ForecastWeatherData> ForecastAsync(string code, Localization localization)
         {
-            var resp = await _client.GetForecastAsync(code, localization);
+            var resp = await _client.GetForecastAsync(code, localization).ConfigureAwait(false);
             return _mapper.Map<ForecastWeatherReponse, ForecastWeatherData>(resp);
         }
     }
